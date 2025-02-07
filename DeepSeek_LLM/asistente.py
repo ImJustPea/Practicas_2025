@@ -4,14 +4,14 @@ import os  # Manejo de archivos y rutas del sistema
 import speech_recognition as sr  # Reconocimiento de voz para entrada de audio
 
 # Definición de las rutas de los archivos del modelo y datos
-MODEL = "model/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf"  # Ruta del modelo de lenguaje
-CONOCIMIENTO = "model/model_data/conocimiento.txt"  # Archivo con información adicional para el modelo
-HISTORIAL = "model/model_data/historial.txt"  # Archivo que almacena el historial de conversaciones
+MODEL = "DeepSeek_LLM/model/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf"  # Ruta del modelo de lenguaje
+CONOCIMIENTO = "DeepSeek_LLM/model/model_data/conocimiento.txt"  # Archivo con información adicional para el modelo
+HISTORIAL = "DeepSeek_LLM/model/model_data/historial.txt"  # Archivo que almacena el historial de conversaciones
 
 # Carga del modelo Llama desde el repositorio de Hugging Face
 llm_repo = Llama.from_pretrained(
 	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-	filename="DeepSeek-Coder-V2-Lite-Instruct-IQ3_M.gguf",
+	filename="DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf",
     revision="main",
     n_ctx=2048,
     n_gpu_layers=-1,
