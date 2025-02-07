@@ -20,7 +20,16 @@ pip install llama-cpp-python speechrecognition
 ### 2.3. Requisitos de Hardware
 - **GPU recomendada** para mejorar el rendimiento del modelo.  
 - **Micrófono** en caso de utilizar entrada por voz.  
+- **Modelo LLM**, debes descargar el modelo que desees.
 
+#### 2.3.1 Adaptación y descarga del modelo
+- **Descarga**: [LLM Studio](https://lmstudio.ai/model/deepseek-coder-v2-lite-instruct) <-- Dejo el link de donde he descargado el modelo que he usado
+- **Adaptación en el código**:
+
+```python
+# Definición de las rutas de los archivos del modelo y datos
+MODEL = "model/<MODELO>"  # Ruta del modelo de lenguaje
+```
 ## 3. Arquitectura del Sistema
 El asistente sigue un flujo basado en:
 
