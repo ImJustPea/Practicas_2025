@@ -54,5 +54,4 @@ Explicación del flujo de trabajo del código, incluyendo carga del modelo, gest
 
 ## 7. Contacto y Mantenimiento
 **Autor:** Gontzal Izurza Rementeria  
-**Última actualización:** 07/02/2025  
-**Repositorio:** [GitHub](https://github.com/ImJustPea/Practicas_2025/tree/main/DeepSeek_LLM)  
+**Última actualización:** 07/02/2025
