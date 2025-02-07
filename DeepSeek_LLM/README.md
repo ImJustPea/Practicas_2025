@@ -10,26 +10,39 @@ El código requiere las siguientes bibliotecas de Python:
 
 - `llama_cpp` → Para cargar y ejecutar el modelo de lenguaje Llama.  
 - `os` → Para gestionar archivos y directorios.  
-- `speech_recognition` → Para el reconocimiento de voz.  
+- `speech_recognition` → Para el reconocimiento de voz.
+- `huggingface-hub` → Para referenciar el modelo desde el repositorio de huggingface.
 
 ### 2.2. Instalación de Dependencias
 Ejecutar el siguiente comando para instalar los paquetes necesarios:
 ```bash
-pip install llama-cpp-python speechrecognition
+pip install llama-cpp-python speechrecognition huggingface-hub
 ```
 ### 2.3. Requisitos de Hardware
 - **GPU recomendada** para mejorar el rendimiento del modelo.  
-- **Micrófono** en caso de utilizar entrada por voz.  
-- **Modelo LLM**, debes descargar el modelo que desees.
+- **Micrófono** en caso de utilizar entrada por voz.
 
-#### 2.3.1 Adaptación y descarga del modelo
+#### 2.3.1 Adaptación y descarga del modelo (Si es necesario en local)
 - **Descarga**: [LLM Studio](https://lmstudio.ai/model/deepseek-coder-v2-lite-instruct) <-- Dejo el link de donde he descargado el modelo que he usado
 - **Adaptación en el código**:
 
+##### Local
 ```python
 # Definición de las rutas de los archivos del modelo y datos
 MODEL = "model/<MODELO>"  # Ruta del modelo de lenguaje
 ```
+##### Repositorio Huggingface
+```python
+# Carga del modelo Llama desde el repositorio de Hugging Face
+llm_repo = Llama.from_pretrained(
+	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+	filename="DeepSeek-Coder-V2-Lite-Instruct-IQ3_M.gguf",
+    revision="main",
+    n_ctx=2048,
+    n_gpu_layers=-1,
+)
+```
+
 ## 3. Arquitectura del Sistema
 El asistente sigue un flujo basado en:
 

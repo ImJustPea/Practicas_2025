@@ -8,8 +8,17 @@ MODEL = "model/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf"  # Ruta del modelo d
 CONOCIMIENTO = "model/model_data/conocimiento.txt"  # Archivo con información adicional para el modelo
 HISTORIAL = "model/model_data/historial.txt"  # Archivo que almacena el historial de conversaciones
 
+# Carga del modelo Llama desde el repositorio de Hugging Face
+llm_repo = Llama.from_pretrained(
+	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+	filename="DeepSeek-Coder-V2-Lite-Instruct-IQ3_M.gguf",
+    revision="main",
+    n_ctx=2048,
+    n_gpu_layers=-1,
+)
+
 # Carga del modelo Llama con parámetros personalizados
-llm = Llama(model_path=MODEL, n_ctx=2048, n_gpu_layers=-1)
+llm_local = Llama(model_path=MODEL, n_ctx=2048, n_gpu_layers=-1)
 
 # Verificación de la existencia del modelo antes de continuar
 if not os.path.exists(MODEL):
@@ -85,7 +94,7 @@ while True:
     prompt = f"{conocimiento}\n{conversation_history}\nUser: {user_input}\nAssistant:"
 
     # Generación de respuesta del modelo
-    output = llm(
+    output = llm_repo(
         prompt,
         max_tokens=500,      # Longitud máxima de la respuesta
         temperature=0.3,     # Control de creatividad (menor temperatura = más precisión)
