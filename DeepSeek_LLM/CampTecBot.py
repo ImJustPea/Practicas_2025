@@ -9,13 +9,14 @@ CONOCIMIENTO = "DeepSeek_LLM/model/model_data/conocimiento.txt"  # Archivo con i
 HISTORIAL = "DeepSeek_LLM/model/model_data/historial.txt"  # Archivo que almacena el historial de conversaciones
 
 # Carga del modelo Llama desde el repositorio de Hugging Face
-llm_repo = Llama.from_pretrained(
-	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-	filename="DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf",
-    revision="main",
-    n_ctx=2048,
-    n_gpu_layers=-1,
-)
+
+# llm_repo = Llama.from_pretrained(
+# 	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+# 	filename="DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf",
+#     revision="main",
+#     n_ctx=2048,
+#     n_gpu_layers=-1,
+# )
 
 # Carga del modelo Llama con parámetros personalizados
 llm_local = Llama(model_path=MODEL, n_ctx=2048, n_gpu_layers=-1)
@@ -62,12 +63,17 @@ print("\nMenú de entrada:")
 print("1. Entrada por texto")
 print("2. Entrada por micrófono")
 
-user_choice = input("Elige una opción (1 o 2): ")
+while True:
+    user_choice = input("Elige una opción (1 o 2): ")
+    if user_choice in ["1", "2"]:
+        break
+    else:
+        print("Opción inválida. Inténtalo de nuevo.")
 
 # Determina si se usará el micrófono según la elección del usuario
 use_microphone = user_choice == "2"
 
-print("\nDeepSeek LLM. Escribe 'borrar' para resetear la memoria o 'salir' para terminar.")
+print("\nCampTecBot LLM. Escribe 'borrar' para resetear la memoria o 'salir' para terminar.")
 
 # Bucle principal de la conversación
 while True:
@@ -91,13 +97,13 @@ while True:
         continue
 
     # Construcción del prompt incluyendo el historial de conversación
-    prompt = f"{conocimiento}\n{conversation_history}\nUser: {user_input}\nAssistant:"
+    prompt = f"Sistema: {conocimiento}\n\nHistorial: {conversation_history}\n\nUsuario: {user_input}"
 
     # Generación de respuesta del modelo
-    output = llm_repo(
+    output = llm_local(
         prompt,
-        max_tokens=500,      # Longitud máxima de la respuesta
-        temperature=0.3,     # Control de creatividad (menor temperatura = más precisión)
+        max_tokens=250,      # Longitud máxima de la respuesta
+        temperature=0.5,     # Control de creatividad (menor temperatura = más precisión)
         top_p=0.9,           # Controla la diversidad de palabras
         repeat_penalty=1.2,  # Penalización para evitar repeticiones en la respuesta
     )
@@ -106,11 +112,11 @@ while True:
     response = output["choices"][0]["text"].strip()
 
     # Actualización del historial de conversación
-    conversation_history += f"\nUser: {user_input}\nAssistant: {response}"
+    conversation_history += f"User: {user_input}\n{response}\n\n"
 
     # Guardado del historial en el archivo de texto
     with open(HISTORIAL, "w", encoding="utf-8") as file:
         file.write(conversation_history)
 
     # Muestra la respuesta en la consola
-    print(f"\nDeepSeek: {response}")
+    print(f"\n{response}")
