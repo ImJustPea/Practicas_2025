@@ -1,3 +1,4 @@
+.gitignore
 entorno_py/
 Analisis_Datos/
 DeepSeek_LLM/model/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf
