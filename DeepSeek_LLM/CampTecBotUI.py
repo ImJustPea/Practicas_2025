@@ -63,7 +63,7 @@ def handle_text_input():
         conversation_display.setText("Memoria borrada.")
         return
     
-    prompt = f"Sistema: {conocimiento}\n\nHistorial: {conversation_history}\n\nUsuario: {user_input}"
+    prompt = f"System: {conocimiento}\n\nHistory: {conversation_history}\n\nUser: {user_input}"
     
     # Generación de respuesta del modelo
     output = llm_local(

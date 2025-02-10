@@ -8,7 +8,7 @@ Este documento proporciona una descripción técnica del asistente conversaciona
 ### 2.1. Dependencias
 El código requiere las siguientes bibliotecas de Python:
 
-- `llama_cpp` → Para cargar y ejecutar el modelo de lenguaje Llama.  
+- `llama_cpp` → Para cargar y ejecutar el modelo de lenguaje.  
 - `os` → Para gestionar archivos y directorios.  
 - `speech_recognition` → Para el reconocimiento de voz.
 - `huggingface-hub` → Para referenciar el modelo desde el repositorio de huggingface.
