@@ -1,14 +1,20 @@
 # Importación de librerías necesarias
 from llama_cpp import Llama  # Carga y ejecución del modelo de lenguaje Llama
-import os  # Manejo de archivos y rutas del sistema
 import speech_recognition as sr  # Reconocimiento de voz para entrada de audio
+import pyttsx3  # Síntesis de voz para salida de audio
+import os  # Manejo de archivos y rutas del sistema
+
+
+# Inicialización del motor de síntesis de voz
+tts_engine = pyttsx3.init()
+tts_engine.setProperty("rate", 150)  # Ajusta la velocidad del habla
 
 # Definición de las rutas de los archivos del modelo y datos
 MODEL = "DeepSeek_LLM/model/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf"  # Ruta del modelo de lenguaje
 CONOCIMIENTO = "DeepSeek_LLM/model/model_data/conocimiento.txt"  # Archivo con información adicional para el modelo
 HISTORIAL = "DeepSeek_LLM/model/model_data/historial.txt"  # Archivo que almacena el historial de conversaciones
 
-# Carga del modelo Llama desde el repositorio de Hugging Face
+# Carga del modelo Llama desde el repositorio de Hugging Face   
 
 # llm_repo = Llama.from_pretrained(
 # 	repo_id="lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
@@ -57,6 +63,11 @@ def get_audio_input():
         except sr.RequestError:
             print("Error al conectar con el servicio de reconocimiento.") # Si hay un error de conexión, se muestra un mensaje
             return None
+
+# Función para convertir texto en voz
+def speak(text):
+    tts_engine.say(text)
+    tts_engine.runAndWait()
 
 # Menú para seleccionar el tipo de entrada (texto o micrófono)
 print("\nMenú de entrada:")
@@ -120,3 +131,7 @@ while True:
 
     # Muestra la respuesta en la consola
     print(f"\n{response}")
+    
+    # Omitir la primera palabra en la respuesta que será el nombre del asistente
+    response_wo_name = ' '.join(response.split(' ')[1:])
+    speak(response_wo_name)

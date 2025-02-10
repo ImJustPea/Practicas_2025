@@ -11,12 +11,13 @@ El código requiere las siguientes bibliotecas de Python:
 - `llama_cpp` → Para cargar y ejecutar el modelo de lenguaje.  
 - `os` → Para gestionar archivos y directorios.  
 - `speech_recognition` → Para el reconocimiento de voz.
+- `pyttsx3` → Síntesis de voz para salida de audio.
 - `huggingface-hub` → Para referenciar el modelo desde el repositorio de huggingface.
 
 ### 2.2. Instalación de Dependencias
 Ejecutar el siguiente comando para instalar los paquetes necesarios:
 ```bash
-pip install llama-cpp-python speechrecognition huggingface-hub
+pip install llama-cpp-python speechrecognition huggingface-hub pyttsx3
 ```
 ### 2.3. Requisitos de Hardware
 - **GPU recomendada** para mejorar el rendimiento del modelo.  
