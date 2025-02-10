@@ -11,7 +11,11 @@ CONOCIMIENTO = "DeepSeek_LLM/model/model_data/conocimiento.txt"
 HISTORIAL = "DeepSeek_LLM/model/model_data/historial.txt"
 
 # Carga del modelo Llama
-llm_local = Llama(model_path=MODEL, n_ctx=2048, n_gpu_layers=-1)
+llm_local = Llama(
+    model_path=MODEL,      # Ruta del modelo de lenguaje
+    n_ctx=2048,            # Número de tokens en el contexto
+    n_gpu_layers=-1        # Número de capas que trabaja la GPU (Todas = -1)
+)
 
 # Verificación de la existencia del modelo antes de continuar
 if not os.path.exists(MODEL):
