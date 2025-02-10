@@ -5,25 +5,35 @@ Este documento proporciona una descripción técnica del asistente conversaciona
 
 ## 2. Requisitos del Sistema
 
-### 2.1. Dependencias
+### 2.1 Git
+Es necesario descargar [Git](https://git-scm.com/downloads) para la instalación de la libreria `llama-cpp-python` si no nos dará un error
+
+### 2.2. Dependencias
 El código requiere las siguientes bibliotecas de Python:
 
-- `llama_cpp` → Para cargar y ejecutar el modelo de lenguaje.  
-- `os` → Para gestionar archivos y directorios.  
 - `speech_recognition` → Para el reconocimiento de voz.
-- `pyttsx3` → Síntesis de voz para salida de audio.
 - `huggingface-hub` → Para referenciar el modelo desde el repositorio de huggingface.
+- `pyttsx3` → Síntesis de voz para salida de audio.
+- `os` → Para gestionar archivos y directorios.  
+- `PySide6` → Si quieres usar la versión con interfaz.  
 
-### 2.2. Instalación de Dependencias
+- `cmake` → Para la instalación de llama-cpp-python.
+- `ninja` → Para la instalación de llama-cpp-python.
+
+- `llama-cpp-python` → Para cargar y ejecutar el modelo de lenguaje.  
+
+
+### 2.3. Instalación de Dependencias
 Ejecutar el siguiente comando para instalar los paquetes necesarios:
 ```bash
-pip install llama-cpp-python speechrecognition huggingface-hub pyttsx3
+pip install speechrecognition huggingface-hub pyttsx3 cmake ninja
+pip install llama-cpp-python
 ```
-### 2.3. Requisitos de Hardware
+### 2.4. Requisitos de Hardware
 - **GPU recomendada** para mejorar el rendimiento del modelo.  
 - **Micrófono** en caso de utilizar entrada por voz.
 
-#### 2.3.1 Adaptación y descarga del modelo (Si es necesario en local)
+#### 2.4.1 Adaptación y descarga del modelo (Si es necesario en local)
 - **Descarga**: [LLM Studio](https://lmstudio.ai/model/deepseek-coder-v2-lite-instruct) <-- Dejo el link de donde he descargado el modelo que he usado
 - **Adaptación en el código**:
 
